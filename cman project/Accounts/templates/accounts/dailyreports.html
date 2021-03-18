@@ -1,5 +1,53 @@
 {% extends 'accounts/main.html' %}
 
 {%block content%}
-    <h5>Daily Reports</h5>
+
+<br>
+<br>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-5" style="color: tomato;"> <b> Daily Report </b> </h1>
+            <hr>
+        </div>
+    </div>
+
+<br>
+    
+    <div class="container">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Employee ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Punch In</th>
+                <th scope="col">Punch Out</th>
+                <th scope="col">Spent</th>
+                <th scope="col">Deficiency</th>
+                <th scope="col">Percentile</th>
+                <th scope="col">Status</th>
+                <th scope="col">Emotion</th>
+
+            </tr>
+            </thead>
+            <tbody>
+                {% for i in entries %}
+                    <tr>
+                        <td>{{i.date}}</td>
+                        <td>{{i.emp_id}}</td>
+                        <td>{{i.name}}</td>
+                        <td>{{i.punchin}}</td>
+                        <td>{{i.punchout}}</td>
+                        <td>{{i.spent}}</td>
+                        <td>{{i.deficiency}}</td>
+                        <td>{{i.percentile}}</td>
+                        <td>{{i.status}}</td>
+                        <td>{{i.emotion}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
 {%endblock%}

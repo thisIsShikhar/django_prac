@@ -21,10 +21,13 @@ from django.http import HttpRequest,HttpResponse
 from django.urls.conf import include
 
 def home(request):
-    return HttpResponse('home page')
+    return HttpResponse('home')
 
-def about(request):
-    return HttpResponse('about page')
+def dailyreports(request):
+    return HttpResponse('dailyreports')
+
+def monthlyreports(request):
+    return HttpResponse('monthlyreports')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
