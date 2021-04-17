@@ -12,13 +12,47 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = serializers.UserSerializer
 
 
-class PostList(generics.ListCreateAPIView):
+class ArticlesList(generics.ListCreateAPIView):
     queryset = Articles.objects.all()
     serializer_class = serializers.PostSerializer
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+class ArticlesDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Articles.objects.all()
+    serializer_class = serializers.PostSerializer
+
+
+class CommentsList(generics.ListCreateAPIView):
+    queryset = Articles.objects.all()
+    serializer_class = serializers.PostSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+class CommentsDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Articles.objects.all()
+    serializer_class = serializers.PostSerializer
+
+class LikesList(generics.ListCreateAPIView):
+    queryset = Articles.objects.all()
+    serializer_class = serializers.PostSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+class LikesDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Articles.objects.all()
+    serializer_class = serializers.PostSerializer
+
+class MediaList(generics.ListCreateAPIView):
+    queryset = Articles.objects.all()
+    serializer_class = serializers.PostSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+class MediaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Articles.objects.all()
     serializer_class = serializers.PostSerializer

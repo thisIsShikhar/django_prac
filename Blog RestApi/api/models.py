@@ -6,6 +6,11 @@ STATUS = (
     (2,"Unpublished")
 )
 
+CSTATUS = (
+    (0,"Published"),
+    (1,"Unpublished")
+)
+
 class Articles(models.Model):
     
     article_id=models.UUIDField()
@@ -21,6 +26,38 @@ class Articles(models.Model):
 
     class Meta:
         ordering = ['created_at']
+
+    def __str__(self):
+        return self.article_title
+
+
+class Comments(models.Model):
+    comment_id=models.UUIDField()
+    article_id=models.ForeignKey("Articles", on_delete=models.CASCADE)
+    commentator_id=models.UUIDField()
+    comment=models.CharField(max_length=255)
+    status=models.IntegerField(choices=CSTATUS, default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.article_title
+
+class Likes(models.Model):
+    article_id=models.ForeignKey("Articles", on_delete=models.CASCADE)
+    user_id=models.UUIDField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.article_title
+
+class Media(models.Model):
+    article_id=models.ForeignKey("Articles", on_delete=models.CASCADE)
+    content_type=models.CharField(max_length=120)
+    content_name=models.CharField(max_length=120)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now_add=True)    
 
     def __str__(self):
         return self.article_title
