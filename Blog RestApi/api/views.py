@@ -1,7 +1,16 @@
+from django_filters.filters import OrderingFilter
 from rest_framework import generics
 from api import serializers
 from django.contrib.auth.models import User
 from api.models import Articles
+
+from rest_framework.pagination import (
+
+    LimitOffsetPagination,
+    PageNumberPagination
+)
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
@@ -15,6 +24,11 @@ class UserDetail(generics.RetrieveAPIView):
 class ArticlesList(generics.ListCreateAPIView):
     queryset = Articles.objects.all()
     serializer_class = serializers.PostSerializer
+    pagination_class=LimitOffsetPagination
+
+    filter_backends=[OrderingFilter,DjangoFilterBackend]
+    ordering_fields=['total_likes']
+    filterset_fields=['is_featured']
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
